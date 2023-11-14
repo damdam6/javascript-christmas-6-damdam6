@@ -1,17 +1,24 @@
-import InputView from './InputView';
-import OutputView from './OutputView';
-import GetInputSaver from '../ModelView/GetInput';
-import { Data } from '../Model/Data';
+import InputView from './InputView.js';
+import OutputView from './OutputView.js';
+import GetInputSaver from '../ModelView/GetInput.js';
+import { Data, GameStage } from '../Model/Data.js';
 
 const RequestView = async function OrderView() {
-  const input = InputView.readDate();
-  while (!Data.GameStage.getDateAgain) {
-    InputView.readDate();
-    GetInputSaver.setDate(input);
+  while (!GameStage.getDateAgain) {
+    const input = await InputView.readDate();
+    try {
+      GetInputSaver.setDate(input);
+    } catch (e) {
+      OutputView.printError(e);
+    }
   }
-  while (!Data.GameStage.getMenuAgain) {
-    InputView.readMenu();
-    GetInputSaver.setMenu(input);
+  while (!GameStage.getMenuAgain) {
+    const input = await InputView.readMenu();
+    try {
+      GetInputSaver.setMenu(input);
+    } catch (e) {
+      OutputView.printError(e);
+    }
   }
 };
 const ResultView = function RequestView() {
@@ -33,8 +40,9 @@ const ViewChange = async function ViewChange(stage) {
 const MainView = async function MainView() {
   let stage = 0;
   while (!Data.gameEnd) {
-    ViewChange(stage);
+    await ViewChange(stage);
     stage += 1;
+    break;
   }
 };
 

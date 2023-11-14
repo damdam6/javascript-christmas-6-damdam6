@@ -1,7 +1,9 @@
 const Data = {
+  date: 1,
   order: [],
   totalPrize: 0,
   initailize() {
+    this.date = 1;
     this.order = [];
     this.totalPrize = 0;
   },
