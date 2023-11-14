@@ -1,5 +1,9 @@
+import MainView from './View/ShowView.js';
+
 class App {
-  async run() {}
+  async run() {
+    await MainView();
+  }
 }
 
 export default App;
