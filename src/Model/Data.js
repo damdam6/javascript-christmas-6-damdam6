@@ -7,11 +7,24 @@ const UserData = {
     totalMainCnt: 0,
   },
   dDayPromotion: 900,
+  weekendPromotion: 0,
+  weekdayPromotion: 0,
+  bonusPromotion: false,
+  specialPromotion: false,
+  totalPromotion: 0,
+  finalPrice: 0,
+  eventBadge: '없음',
   initailize() {
     this.date = 1;
     this.order = [];
     this.totalPrice = 0;
     this.dDayPromotion = 900;
+    this.weekendPromotion = 0;
+    this.weekdayPromotion = 0;
+    this.bonusPromotion = false;
+    this.specialPromotion = false;
+    this.totalPromotion = 0;
+    this.eventBadge = '없음';
   },
 };
 
@@ -70,6 +83,8 @@ const FIXED_DATA = {
     DATE_END: 31,
     CHAMPAGNE_MIN_PRICE: 120000,
     DDAY_PROMO_AMOUNT: 100,
+    WEEK_PROMO_AMOUNT: 2023,
+    SPECIAL_PROMO_AMOUNT: 1000,
   },
 };
 
