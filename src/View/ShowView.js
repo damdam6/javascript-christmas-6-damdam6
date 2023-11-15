@@ -28,7 +28,7 @@ const ResultView = function RequestView() {
 const ViewChange = async function ViewChange(stage) {
   switch (stage) {
     case 0:
-      RequestView();
+      await RequestView();
       break;
     case 1:
       //

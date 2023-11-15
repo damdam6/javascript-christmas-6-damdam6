@@ -36,7 +36,7 @@ const validateOrder = {
       total += menuObject[menu];
     }
     if(total > FIXED_DATA.PROMOTION_RULE.MAX_ORDER_CNT){
-
+      throw ERROR_DATA.WRONG_DATE;
     }
   }
 
@@ -88,7 +88,6 @@ const validate = {
 
 const GetInputSaver = {
   setDate(input) {
-    console.log('test');
     Data.date = validate.dateValidate(input);
   },
   setMenu(input) {
