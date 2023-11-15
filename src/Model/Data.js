@@ -1,11 +1,17 @@
 const UserData = {
   date: 1,
   order: { },
-  totalPrize: 0,
+  totalPrice: 0,
+  menuType:{
+    totalDesserCnt: 0,
+    totalMainCnt: 0,
+  },
+  dDayPromotion: 900,
   initailize() {
     this.date = 1;
     this.order = [];
-    this.totalPrize = 0;
+    this.totalPrice = 0;
+    this.dDayPromotion = 900;
   },
 };
 
@@ -63,6 +69,7 @@ const FIXED_DATA = {
     DATE_START: 1,
     DATE_END: 31,
     CHAMPAGNE_MIN_PRICE: 120000,
+    DDAY_PROMO_AMOUNT: 100,
   },
 };
 

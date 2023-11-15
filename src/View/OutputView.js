@@ -31,7 +31,8 @@ const ResultView = {
    }
   },
   printTotalPrice() {
-
+    MissionUtils.Console.print(`<할인 전 총주문 금액>`);
+    MissionUtils.Console.print(`${UserData.totalPrice}원`);
   },
   printBonusMenu() {
 

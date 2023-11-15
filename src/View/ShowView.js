@@ -2,6 +2,7 @@ import InputView from './InputView.js';
 import OutputView from './OutputView.js';
 import {GetInputSaver} from '../ModelView/GetInput.js';
 import { ProgramStage } from '../Model/Data.js';
+import PromotionCalculator from '../ModelView/PromotionCalculator.js';
 
 const RequestView = async function OrderView() {
   OutputView.printHello();
@@ -23,6 +24,7 @@ const RequestView = async function OrderView() {
   }
 };
 const ResultView = function RequestView() {
+  PromotionCalculator.promotionCalculator();
   OutputView.printResult();
 };
 
