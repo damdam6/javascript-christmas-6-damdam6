@@ -52,12 +52,16 @@ const PromotionCalculator = {
   bonusPromotion() {
     if(UserData.totalPrice >= FIXED_DATA.PROMOTION_RULE.CHAMPAGNE_MIN_PRICE){
       UserData.bonusPromotion = true;
+      return;
     }
+    UserData.bonusPromotion = false;
   },
   specialPromotion() {
     if(FIXED_DATA.SPECIAL_PROMOTION_DATE.STAR_DAY.includes(UserData.date)){
       UserData.specialPromotion = true;
+      return;
     }
+    UserData.specialPromotion = false;
   },
   totalPromotionAmount() {
     let total = 0;

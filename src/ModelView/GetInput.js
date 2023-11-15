@@ -81,6 +81,7 @@ const validate = {
       menuObject[menu] = quantity;
     });
     validateOrder.beverageOnly(menuObject);
+    validateOrder.menuLimit(menuObject);
     return menuObject;
   },
   
