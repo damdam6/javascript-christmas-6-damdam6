@@ -1,6 +1,6 @@
 const Data = {
   date: 1,
-  order: [],
+  order: { },
   totalPrize: 0,
   initailize() {
     this.date = 1;
@@ -9,14 +9,14 @@ const Data = {
   },
 };
 
-const GameStage = {
+const ProgramStage = {
   gameEnd: false,
-  getDateAgain: false,
-  getMenuAgain: false,
+  getDateAgain: true,
+  getMenuAgain: true,
   initailize() {
     this.gameEnd = false;
-    this.getDateAgain = false;
-    this.getMenuAgain = false;
+    this.getDateAgain = true;
+    this.getMenuAgain = true;
   },
 };
 
@@ -66,4 +66,4 @@ const FIXED_DATA = {
   },
 };
 
-export { Data, FIXED_DATA, GameStage };
+export { Data, FIXED_DATA, ProgramStage };

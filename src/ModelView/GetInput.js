@@ -1,5 +1,37 @@
 import ERROR_DATA from '../Model/Error.js';
-import { Data, GameStage } from '../Model/Data.js';
+import { Data, ProgramStage, FIXED_DATA } from '../Model/Data.js';
+
+const validateOrder = {
+  duplicate(menu, menuObject){
+    if (menuObject.hasOwnProperty(menu)) {
+      throw ERROR_DATA.WRONG_MENU;
+      return false;
+    }
+    return true;
+  },
+  numeric(quantity) {
+    if (isNaN(quantity)||quantity <= 0) {
+      throw ERROR_DATA.WRONG_MENU;
+      return;
+    }
+    return true;
+  },
+  beverageOnly(menuObject) {
+    const beverageItems = new Set(Object.keys(FIXED_DATA.MENU_LIST.BEVERAGES));
+    let containsNonBeverage = false;
+  
+    for (const item in menuObject) {
+      if (!beverageItems.has(item)) {
+        containsNonBeverage = true;
+        break;
+      }
+    }
+    if (!containsNonBeverage) {
+      throw ERROR_DATA.WRONG_MENU;;
+    }
+  }
+
+}
 
 const validate = {
   dateValidate(input) {
@@ -12,21 +44,47 @@ const validate = {
       throw ERROR_DATA.WRONG_DATE;
       return;
     }
-    GameStage.getDateAgain = true;
+    ProgramStage.getDateAgain = false;
+    return numericValue;
   },
-  menuValidate(input) {
+  parseMenu(input) {  
+    const items = input.split(',');
+    const menuObject = {};
+  
+    items.forEach(item => {
+      const parts = item.split('-');
+      if (parts.length !== 2) {
+        throw ERROR_DATA.WRONG_MENU;
+        return;
+      }
+  
+      const [menu, quantityStr] = parts;
+      const quantity = parseInt(quantityStr, 10);
+      validateOrder.duplicate(menu, menuObject);
+      validateOrder.numeric(quantity);
 
+
+      menuObject[menu] = quantity;
+    });
+    validateOrder.beverageOnly(menuObject);
+    return menuObject;
+  },
+  
+  menuValidate(input) {
+    const order = this.parseMenu(input);
+    ProgramStage.getMenuAgain = false;
+    return order;
   },
 };
 
 const GetInputSaver = {
   setDate(input) {
-    validate.dateValidate(input);
-    Data.date = input;
+    console.log('test');
+    Data.date = validate.dateValidate(input);
   },
   setMenu(input) {
-
+    Data.order =  validate.menuValidate(input);
   },
 };
 
-export default GetInputSaver;
+export { GetInputSaver, validate};
