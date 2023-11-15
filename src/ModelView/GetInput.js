@@ -1,5 +1,5 @@
 import ERROR_DATA from '../Model/Error.js';
-import { Data, ProgramStage, FIXED_DATA } from '../Model/Data.js';
+import { UserData, ProgramStage, FIXED_DATA } from '../Model/Data.js';
 
 const validateOrder = {
   duplicate(menu, menuObject){
@@ -37,21 +37,21 @@ const validateOrder = {
       throw ERROR_DATA.WRONG_MENU;
     }
   },
-  menuExits(menu){
-      const categories = Object.values(FIXED_DATA.MENU_LIST);
-      for (const category of categories) {
-        if(!(menu in category)) {
-          throw ERROR_DATA.WRONG_MENU;
-        }
+  menuExists(menu) {
+    for (const category in FIXED_DATA.MENU_LIST) {
+      if (Object.keys(FIXED_DATA.MENU_LIST[category]).includes(menu)) {
+        return;
       }
-    },
+    }
+    throw ERROR_DATA.WRONG_MENU;
+  },
+  
   validateOrder(menu, menuObject, quantity) {
     this.duplicate(menu, menuObject);
     this.numeric(quantity);
-    this.menuExits(menu);
+    this.menuExists(menu);
   }
 }
-
 
 const validate = {
   dateValidate(input) {
@@ -93,10 +93,10 @@ const validate = {
 
 const GetInputSaver = {
   setDate(input) {
-    Data.date = validate.dateValidate(input);
+    UserData.date = validate.dateValidate(input);
   },
   setMenu(input) {
-    Data.order =  validate.menuValidate(input);
+    UserData.order =  validate.menuValidate(input);
   },
 };
 

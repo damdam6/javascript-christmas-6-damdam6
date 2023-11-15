@@ -1,4 +1,4 @@
-const Data = {
+const UserData = {
   date: 1,
   order: { },
   totalPrize: 0,
@@ -66,4 +66,4 @@ const FIXED_DATA = {
   },
 };
 
-export { Data, FIXED_DATA, ProgramStage };
+export { UserData, FIXED_DATA, ProgramStage };

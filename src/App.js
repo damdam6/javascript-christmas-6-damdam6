@@ -1,8 +1,8 @@
 import MainView from './View/ShowView.js';
-import {Data, ProgramStage} from './Model/Data.js';
+import {UserData, ProgramStage} from './Model/Data.js';
 class App {
   async run() {
-    Data.initailize();
+    UserData.initailize();
     ProgramStage.initailize();
     await MainView();
     

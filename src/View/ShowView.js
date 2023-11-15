@@ -1,9 +1,10 @@
 import InputView from './InputView.js';
 import OutputView from './OutputView.js';
 import {GetInputSaver} from '../ModelView/GetInput.js';
-import { Data, ProgramStage } from '../Model/Data.js';
+import { ProgramStage } from '../Model/Data.js';
 
 const RequestView = async function OrderView() {
+  OutputView.printHello();
   while (ProgramStage.getDateAgain) {
     const input = await InputView.readDate();
     try {
@@ -22,7 +23,7 @@ const RequestView = async function OrderView() {
   }
 };
 const ResultView = function RequestView() {
-
+  OutputView.printResult();
 };
 
 const ViewChange = async function ViewChange(stage) {
@@ -31,7 +32,7 @@ const ViewChange = async function ViewChange(stage) {
       await RequestView();
       break;
     case 1:
-      //
+      ResultView();
       break;
     default:
   }
@@ -39,13 +40,9 @@ const ViewChange = async function ViewChange(stage) {
 
 const MainView = async function MainView() {
 
-  let stage = 0;
-  while (!Data.gameEnd) {
+    await ViewChange(0);
+    await ViewChange(1);
 
-    await ViewChange(stage);
-    stage += 1;
-    break;
-  }
 };
 
 export default MainView;
