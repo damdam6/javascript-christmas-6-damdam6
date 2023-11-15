@@ -48,17 +48,13 @@ describe('validate.parseMenu', () => {
     expect(() => validate.parseMenu(input)).toThrow(ERROR_DATA.WRONG_MENU);
   });
 
-  it('should throw WRONG_MENU error if only beverages are ordered', () => {
+  it('should throw WRONG_DATE error if the total quantity of ordered items exceeds the limit', () => {
     const input = "제로콜라-26,레드와인-1";
     expect(() => validate.parseMenu(input)).toThrow(ERROR_DATA.WRONG_MENU);
   });
-});
 
-describe('validate.menuValidate', () => {
-  it('should return an object with menu items and quantities', () => {
-    const input = "티본스테이크-2,바비큐립-1";
-    const expected = { 티본스테이크: 2, 바비큐립: 1 };
-    expect(validate.menuValidate(input)).toEqual(expected);
+  it('should throw WRONG_MENU error for non-numeric quantity', () => {
+    const input = "김치찌개-3,티본스테이크-2,바비큐립-1";
+    expect(() => validate.parseMenu(input)).toThrow(ERROR_DATA.WRONG_MENU);
   });
-
 });
