@@ -47,6 +47,11 @@ describe('validate.parseMenu', () => {
     const input = "제로콜라-2,레드와인-1";
     expect(() => validate.parseMenu(input)).toThrow(ERROR_DATA.WRONG_MENU);
   });
+
+  it('should throw WRONG_MENU error if only beverages are ordered', () => {
+    const input = "제로콜라-26,레드와인-1";
+    expect(() => validate.parseMenu(input)).toThrow(ERROR_DATA.WRONG_MENU);
+  });
 });
 
 describe('validate.menuValidate', () => {
