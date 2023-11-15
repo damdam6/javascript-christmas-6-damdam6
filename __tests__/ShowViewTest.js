@@ -109,4 +109,5 @@ describe("예외 테스트", () => {
     // then
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(INVALID_ORDER_MESSAGE));
   });
+
 });
