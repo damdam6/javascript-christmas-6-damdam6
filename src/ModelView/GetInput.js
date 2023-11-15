@@ -10,7 +10,7 @@ const validateOrder = {
     return true;
   },
   numeric(quantity) {
-    if (isNaN(quantity)||quantity <= 0) {
+    if (isNaN(quantity)||quantity < FIXED_DATA.PROMOTION_RULE.MIN_ORDER_CNT) {
       throw ERROR_DATA.WRONG_MENU;
       return;
     }
@@ -29,6 +29,15 @@ const validateOrder = {
     if (!containsNonBeverage) {
       throw ERROR_DATA.WRONG_MENU;;
     }
+  },
+  menuLimit(menuObject){
+    let total = 0;
+    for(const menu in menuObject){
+      total += menuObject[menu];
+    }
+    if(total > FIXED_DATA.PROMOTION_RULE.MAX_ORDER_CNT){
+
+    }
   }
 
 }
@@ -40,9 +49,9 @@ const validate = {
       return;
     }
     const numericValue = parseInt(input, 10);
-    if (numericValue <= 0 || numericValue > 31) {
+    if (numericValue < FIXED_DATA.PROMOTION_RULE.DATE_START 
+      || numericValue > FIXED_DATA.PROMOTION_RULE.DATE_END) {
       throw ERROR_DATA.WRONG_DATE;
-      return;
     }
     ProgramStage.getDateAgain = false;
     return numericValue;
